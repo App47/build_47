@@ -23,7 +23,9 @@ After you install the gem, you'll have a nifty command line utility dubbed `buil
 
 Minimal arguments required: 
 
-	build_47 -t some_token -a app_id  -f path_to_build 
+	build_47 -t your_account_token -a app_id  -f path_to_build 
+
+You can find your account token in your App47 account -- go to the **Profile** link and then click the **API** option to find it.
 
 Optional arguments are `-e environment` (i.e. Production or Test), `-p platform` (i.e. iOS or Android) and `-r release_notes`
 
