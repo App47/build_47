@@ -2,8 +2,8 @@
 
 require 'optparse'
 require 'build_47'
-require 'logger'
 
+# replace me with https://github.com/visionmedia/commander ! 
 options = {}
 OptionParser.new do |opts|  
   opts.on("-t", "--token TOKEN", "Require processor class name") do |t|
@@ -34,8 +34,6 @@ puts "you must provide a path to a particular build file" if options[:path].nil?
 puts "you must provide a token (i.e. -t <token>). You can find this for your account in the App47 dashbard)" if options[:token].nil? 
 puts "you must provide an App Id (i.e. -a <app_id>). You can find this for your account in the App47 dashbard)" if options[:app_id].nil? 
 
-
-# puts "Options are #{options}"
 if( !options[:path].nil? && !options[:token].nil? && !options[:app_id].nil? )
   build = Build47.new(options[:token])
   build.push(options[:app_id], options[:platform], options[:environment], options[:path], options[:notes])
