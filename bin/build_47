@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'build_47'
+require 'logger'
+
+options = {}
+OptionParser.new do |opts|  
+  opts.on("-t", "--token TOKEN", "Require processor class name") do |t|
+    options[:token] = t
+  end
+  opts.on("-a", "--app_id id", "App's ID") do |t|
+    options[:app_id] = t
+  end
+  opts.on("-e", "--environment ENVIRONMENT", "Select environment -- Test or Production") do |t|
+    options[:environment] = t
+  end
+  opts.on("-p", "--platform PLATFORM", "Require platform, such as iOS or Android") do |t|
+    options[:platform] = t
+  end
+  opts.on("-f", "--file FULL PATH", "full path to file for uploading") do |t|
+    options[:path] = t
+  end
+  opts.on("-r", "--release_notes RELEASE NOTES", "release notes -- not required") do |t|
+    options[:notes] = t
+  end
+end.parse!
+
+options[:environment] ||= 'Production'
+options[:platform] ||= 'iOS'
+options[:notes] ||= 'none' 
+
+puts "you must provide a path to a particular build file" if options[:path].nil? 
+puts "you must provide a token (i.e. -t <token>). You can find this for your account in the App47 dashbard)" if options[:token].nil? 
+puts "you must provide an App Id (i.e. -a <app_id>). You can find this for your account in the App47 dashbard)" if options[:app_id].nil? 
+
+
+# puts "Options are #{options}"
+if( !options[:path].nil? && !options[:token].nil? && !options[:app_id].nil? )
+  build = Build47.new(options[:token])
+  build.push(options[:app_id], options[:platform], options[:environment], options[:path], options[:notes])
+else
+  puts "i.e build_47 -t 'some token' -a some app_id -f path_to_file"
+  puts "default arguments are -e Production -p iOS -r notes so if you want to push to Test or declare this as an Android build, use those flags."
+end
