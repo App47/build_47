@@ -13,10 +13,12 @@ class Build47
        :environment => env, 
        :upload => File.new(file_path), 
        :build_file => file_path.split('/')[-1], 
-       :release_notes => release_notes 
+       :release_notes => release_notes,
+       :active => true
        }
     }
-    response = RestClient.post  "https://cirrus.app47.com/api/apps/#{app_id}/builds", build_doc, {"X-Token"=> @token, :accept => :json}
+    # response = RestClient.post  "https://cirrus.app47.com/api/apps/#{app_id}/builds", build_doc, {"X-Token"=> @token, :accept => :json}
+    response = RestClient.post  "http://0.0.0.0:3000/api/apps/#{app_id}/builds", build_doc, {"X-Token"=> @token, :accept => :json}
     puts "response code: #{response.code}"
   end
   

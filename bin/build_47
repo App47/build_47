@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require 'build_47'
+require './lib/build_47'
 
 # replace me with https://github.com/visionmedia/commander ! 
 options = {}
