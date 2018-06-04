@@ -14,7 +14,7 @@ class Build47
        :upload => File.new(file_path), 
        :build_file => file_path.split('/')[-1], 
        :release_notes => release_notes,
-       :active => true
+       :make_active => true
        }
     }
     # response = RestClient.post  "https://cirrus.app47.com/api/apps/#{app_id}/builds", build_doc, {"X-Token"=> @token, :accept => :json}
