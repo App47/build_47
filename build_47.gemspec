@@ -5,9 +5,9 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
   s.authors = ['Andrew Glover']
-  s.date = %q{2012-07-11}
+  s.date = %q{2018-06-05}
   s.description = %q{A simple Ruby utility for pushing builds to App47}
-  s.email = %q{aglover@app47.com}
+  s.email = %q{support@app47.com}
   s.files = ['lib/build_47.rb', 'bin/build_47']
   s.add_runtime_dependency 'rest-client', ['>= 1.6.0']
   s.executables << 'build_47'
