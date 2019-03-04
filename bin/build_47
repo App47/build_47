@@ -3,41 +3,51 @@
 require 'optparse'
 require './lib/build_47'
 
-# replace me with https://github.com/visionmedia/commander ! 
-options = {}
-OptionParser.new do |opts|  
-  opts.on("-t", "--token TOKEN", "Require processor class name") do |t|
+options = { environment: 'Production',
+            release_notes: '',
+            make_active: false,
+            reuse_version_number: false,
+            reset_bundle_identifier: false,
+            notify_users_on_activation: true }
+OptionParser.new do |opts|
+  opts.on('-t', '--token TOKEN', 'Require processor class name') do |t|
     options[:token] = t
   end
-  opts.on("-a", "--app_id id", "App's ID") do |t|
+  opts.on('-a', '--app_id id', "App's ID") do |t|
     options[:app_id] = t
   end
-  opts.on("-e", "--environment ENVIRONMENT", "Select environment -- Test or Production") do |t|
+  opts.on('-e', '--environment ENVIRONMENT', 'Select environment -- Test or Production') do |t|
     options[:environment] = t
   end
-  opts.on("-p", "--platform PLATFORM", "Require platform, such as iOS or Android") do |t|
-    options[:platform] = t
+  opts.on('-p', '--platform PLATFORM', 'Deprecated: platform, determined by file extension') do
+    puts '-p, --platform option is deprecated, the platform will be determined by file extension'
   end
-  opts.on("-f", "--file FULL PATH", "full path to file for uploading") do |t|
+  opts.on('-f', '--file FULL PATH', 'full path to file for uploading') do |t|
     options[:path] = t
   end
-  opts.on("-r", "--release_notes RELEASE NOTES", "release notes -- not required") do |t|
-    options[:notes] = t
+  opts.on('-r', '--release_notes RELEASE NOTES', 'release notes -- not required') do |t|
+    options[:release_notes] = t
+  end
+  opts.on('-m', '--make_active', 'make the build active after processing -- not required') do
+    options[:make_active] = true
+  end
+  opts.on('-i', '--reset_bundle_identifier', 'reset the bundle identifier if changed -- not required') do
+    options[:reset_bundle_identifier] = true
+  end
+  opts.on('-u', '--reuse_version', 'reuse the version number if it already exists -- not required') do
+    options[:reuse_version_number] = true
+  end
+  opts.on('-n', '--notify_users true|false', 'notify users when the build is activated -- not required') do |t|
+    options[:notify_users_on_activation] = %w[true t yes y 1].include?(t.downcase)
   end
 end.parse!
 
-options[:environment] ||= 'Production'
-options[:platform] ||= 'iOS'
-options[:notes] ||= 'none' 
-
-puts "you must provide a path to a particular build file" if options[:path].nil? 
-puts "you must provide a token (i.e. -t <token>). You can find this for your account in the App47 dashbard)" if options[:token].nil? 
-puts "you must provide an App Id (i.e. -a <app_id>). You can find this for your account in the App47 dashbard)" if options[:app_id].nil? 
-
-if( !options[:path].nil? && !options[:token].nil? && !options[:app_id].nil? )
-  build = Build47.new(options[:token])
-  build.push(options[:app_id], options[:platform], options[:environment], options[:path], options[:notes])
-else
+if options[:path].nil? || options[:token].nil? || options[:app_id].nil?
+  puts 'you must provide a path to a particular build file' if options[:path].nil?
+  puts 'you must provide a token (i.e. -t <token>). You can find this for your account in the App47 dashboard)' if options[:token].nil?
+  puts 'you must provide an App Id (i.e. -a <app_id>). You can find this for your account in the App47 dashboard)' if options[:app_id].nil?
   puts "i.e build_47 -t 'some token' -a some app_id -f path_to_file"
-  puts "default arguments are -e Production -p iOS -r notes so if you want to push to Test or declare this as an Android build, use those flags."
+  puts 'default arguments are -e Production -p iOS -r notes so if you want to push to Test or declare this as an Android build, use those flags.'
+else
+  Build47.api_v1_upload(options)
 end

@@ -1,5 +1,5 @@
-#Build 47
-###Super simple command line utility to upload builds to App47.
+# Build 47
+Super simple command line utility to upload builds to App47.
  
 Description
 -----------
@@ -27,21 +27,28 @@ Minimal arguments required:
 
 You can find your account token in your App47 account -- go to the **Profile** link and then click the **API** option to find it.
 
-Optional arguments are `-e environment` (i.e. Production or Test), `-p platform` (i.e. iOS or Android) and `-r release_notes`
+Optional arguments are
+
+| Option  | Allowed values | Default Value | Description|
+|---------|----------------|---------------|------------|
+| -e | Production, Test | Production | Environment for the build|
+| -r | Any string | Empty string | Release notes in qouted string|
+| -n | true or false  | true |Notify users when the build is made active |
+| -m | None | false | Make the build active after processing, if valid|
+| -i | None | false | Reset the build identifier if it has changed|
+| -u | None | false | Reuse the version number if it is already present in the environment|
 
 
 Other Resources
 ------------
 
 For documentation regarding the App47 API, please see our [wiki][app47_wiki_builds]. 
-Also, check out our [Github account][app47_github] for various other projects such as [Enchilada][enchilada_url], which is a simple
-library for importing users into the App47 system via an Excel spreadsheet and our [API Examples][api_examples] for some examples of 
+Also, check out our [Github account][app47_github] for various other projects and our [API Examples][api_examples] for some examples of 
 using our API (in Ruby).
 
-[app47]: http://app47.com
-[app47_wiki_builds]: http://app47.com/wiki/doku.php?id=account_mgmt_api:builds
-[app47_wiki]: http://app47.com/wiki
+[app47]: https://app47.com
+[app47_wiki_builds]: https://support.app47.com/hc/en-us/articles/221905848-Uploading-Builds
+[app47_wiki]: http://app47.support.com/hc
 [rest_client]: https://github.com/archiloque/rest-client
 [api_examples]: https://github.com/App47/api-examples
-[enchilada_url]: https://github.com/App47/enchilada
 [app47_github]:https://github.com/App47/
