@@ -39,6 +39,12 @@ Optional arguments are
 | -u | None | false | Reuse the version number if it is already present in the environment|
 
 
+Releases
+------------
+
+* 1.2.1 - Lower ruby gem version to 2.3.7
+* 1.2.0 - Update to allow for additional build parameters
+
 Other Resources
 ------------
 
