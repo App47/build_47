@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require './lib/build_47'
+require 'build_47'
 
 options = { environment: 'Production',
             release_notes: '',

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name               = 'build_47'
-  s.version            = '1.2.1'
+  s.version            = '1.2.3'
   s.default_executable = 'build_47'
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
   s.authors = ['Chris Schroeder']

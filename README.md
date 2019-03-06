@@ -42,7 +42,7 @@ Optional arguments are
 Releases
 ------------
 
-* 1.2.1 - Lower ruby gem version to 2.3.7
+* 1.2.(1,2,3) - Lower ruby gem version to 2.3.7
 * 1.2.0 - Update to allow for additional build parameters
 
 Other Resources
